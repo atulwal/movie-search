@@ -106,7 +106,7 @@ input[type="text"]::placeholder {
 }
 
 .card-content {
-    height: 80px;
+    height: 100px;
     width: 250px;
     font-size: 0.8rem;
     background-color: hsl(0, 1%, 14%);

@@ -12,7 +12,10 @@ async function getMovie(query) {
     document.querySelector(".movie-cards").style.display = "none";
     document.querySelector(".search-results").style.display = "flex";
     if (data.Search) {
-        data.Search.forEach(movie => {
+        data.Search.forEach(async (movie) => {
+            const imdbUrl = `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`;
+            const imdbResponse = await fetch(imdbUrl);
+            const imdb = await imdbResponse.json();
             const movieCard = document.createElement("div");
             movieCard.classList.add("card");
             movieCard.innerHTML = `
@@ -20,6 +23,7 @@ async function getMovie(query) {
             <div class="card-content">
                 <h3>${movie.Title}</h3>
                 <p class="date">${movie.Year}</p>
+                <p class="date">⭐IMDB: ${imdb.imdbRating}</p>
             </div>
         </div>`;
         resultsDiv.appendChild(movieCard);
